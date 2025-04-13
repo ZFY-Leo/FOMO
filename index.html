@@ -104,12 +104,12 @@
             <input type="radio" name="q10" value="1"> Yes
             <input type="radio" name="q10" value="0"> No
         </div>
-        <button type="button" class="button" onclick="calculateFomo()">Submit</button>
+        <button type="button" class="button" onclick="calculateFomo(event)">Submit</button>
     </form>
 </div>
 
 <script>
-    function calculateFomo() {
+    function calculateFomo(event) {
         var score = 0;
         var totalQuestions = 10;
 
@@ -118,6 +118,7 @@
             var answer = document.querySelector('input[name="q' + i + '"]:checked');
             if (!answer) {
                 alert("Please answer all questions before submitting.");
+                event.preventDefault();  // Prevent form submission
                 return; // Stop submitting if any question is unanswered
             }
             score += parseInt(answer.value);
