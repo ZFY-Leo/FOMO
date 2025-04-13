@@ -112,19 +112,24 @@
     function calculateFomo() {
         var score = 0;
         var totalQuestions = 10;
+
+        // Check if all questions are answered
         for (var i = 1; i <= totalQuestions; i++) {
             var answer = document.querySelector('input[name="q' + i + '"]:checked');
-            if (answer) {
-                score += parseInt(answer.value);
+            if (!answer) {
+                alert("Please answer all questions before submitting.");
+                return; // Stop submitting if any question is unanswered
             }
+            score += parseInt(answer.value);
         }
-        
+
         var fomoPercentage = (score / totalQuestions) * 100;
-        
-        if (fomoPercentage >= 40) {
+
+        // Redirect based on FOMO percentage
+        if (fomoPercentage >= 50) {
             window.location.href = "fomoPage.html"; // Redirect to FOMO help page
         } else {
-            window.location.href = "noFomoPage.html"; // Redirect to "No FOMO" page
+            window.location.href = "noFomoPage.html"; // Redirect to No FOMO page
         }
     }
 </script>
